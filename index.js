@@ -1,10 +1,8 @@
-
-
 const express = require('express')
-// const mongoose = require('mongoose')
+const mongoose = require('mongoose')
 const cors = require('cors')
-const fs = require('fs');
-const readline = require('readline');
+// const fs = require('fs');
+// const readline = require('readline');
 const app = express()
 // Model 
 const Address = require('./schema/Address')
@@ -55,26 +53,26 @@ app.post("/insert", async (req,res)=>{
     }
    }
 })
-app.post("/insert_by_file", async (req,res)=>{
-    const {chk_flg}   = req.body 
-    // async function processLineByLine() {
-        const fileStream = fs.createReadStream('../db/1.txt');
-        const rl = readline.createInterface({
-          input: fileStream,
-          crlfDelay: Infinity
-        });
-        // res.send(rl) ;
-        for await (const line of rl) {
-            console.log(line) ;
-            try{
-                const address = new Address({public_code:line , chk_flg:chk_flg})
-                await address.save()
-                res.send("successfully inserted by txt !")
-            } catch(err){
-                console.log(err)
-            }
-        }
-})
+// app.post("/insert_by_file", async (req,res)=>{
+//     const {chk_flg}   = req.body 
+//     // async function processLineByLine() {
+//         const fileStream = fs.createReadStream('../db/1.txt');
+//         const rl = readline.createInterface({
+//           input: fileStream,
+//           crlfDelay: Infinity
+//         });
+//         // res.send(rl) ;
+//         for await (const line of rl) {
+//             console.log(line) ;
+//             try{
+//                 const address = new Address({public_code:line , chk_flg:chk_flg})
+//                 await address.save()
+//                 res.send("successfully inserted by txt !")
+//             } catch(err){
+//                 console.log(err)
+//             }
+//         }
+// })
 
 app.delete('/delete', async (req,res)=>{
     const {pharse_id} = req.body
