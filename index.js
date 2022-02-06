@@ -1,6 +1,7 @@
 const express = require('express')
 const mongoose = require('mongoose')
 const cors = require('cors')
+require('dotenv').config()
 // const fs = require('fs');
 // const readline = require('readline');
 const app = express()
@@ -17,7 +18,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 // DB Connection
 try {
-    mongoose.connect('mongodb+srv://Admin:kwon4876@cluster0.abgq4.mongodb.net/myFirstDatabase?retryWrites=true&w=majority')
+    console.log(process.env.MONGODB_URI)
+    mongoose.connect(process.env.MONGODB_URI)
     console.log("connection success!")
 } catch(err){
     console.log(err)
